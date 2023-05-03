@@ -54,7 +54,7 @@ class DatagramViewModel: ObservableObject {
         let options = NWProtocolQUIC.Options(alpn: ["echo"])
         options.direction = .bidirectional
         options.isDatagram = true
-        options.maxDatagramFrameSize = 1200
+        options.maxDatagramFrameSize = 65535
         let securityProtocolOptions: sec_protocol_options_t = options.securityProtocolOptions
         sec_protocol_options_set_verify_block(securityProtocolOptions,
                                               { (_: sec_protocol_metadata_t,
