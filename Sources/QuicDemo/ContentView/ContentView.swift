@@ -14,6 +14,7 @@ public struct ContentView: View {
         List {
             ConnectionView()
             DatagramView()
+            ConnectionGroupView()
         }
     }
 }

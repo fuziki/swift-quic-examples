@@ -43,6 +43,7 @@ func serve(addr string) error {
 		log.Println("conn: ", conn)
 		go handleStream(conn)
 		go handleDatagram(conn)
+		go openStream(conn)
 	}
 }
 
@@ -80,6 +81,28 @@ func handleDatagram(conn quic.Connection) {
 
 		err = conn.SendMessage(bytes)
 		log.Printf("send: %#v", err)
+		if err != nil {
+			break
+		}
+	}
+}
+
+func openStream(conn quic.Connection) {
+	str, err := conn.OpenStream()
+	if err != nil {
+		panic(err)
+	}
+	log.Println("stream: ", str)
+	for {
+		wrote, err := str.Write([]byte("Hoge"))
+		log.Printf("write: %#v, %v", wrote, err)
+		if err != nil {
+			break
+		}
+
+		bytes := make([]byte, 32)
+		read, err := str.Read(bytes)
+		log.Printf("read: %#v, %v, %v", read, bytes, err)
 		if err != nil {
 			break
 		}
