@@ -3,9 +3,10 @@ Example project for QUIC using Network.framework.
 
 <img src="docs/screenshot.png" width="320">
 
-## iOS and macOS
+## Client
 ### Requirements
 * Xcode 14.3+
+* iOS 16+ or macOS 13+
 
 ### Build
 Open xcodeproj and build swift-quic-examples.
